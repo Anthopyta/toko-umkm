@@ -23,9 +23,9 @@
                     </a>
 
                     @auth
-                        <a href="{{ route('dashboard') }}"
+                        <a href="{{ route('profile.edit') }}"
                            class="text-sm font-medium text-gray-700 hover:text-gray-900">
-                            Dashboard
+                            Profil
                         </a>
                     @else
                         <a href="{{ route('login') }}"

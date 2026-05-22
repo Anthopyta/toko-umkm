@@ -8,8 +8,20 @@ test('login screen can be rendered', function () {
     $response->assertStatus(200);
 });
 
-test('users can authenticate using the login screen', function () {
+test('customers are redirected to the product catalog after login', function () {
     $user = User::factory()->create();
+
+    $response = $this->post('/login', [
+        'email' => $user->email,
+        'password' => 'password',
+    ]);
+
+    $this->assertAuthenticated();
+    $response->assertRedirect(route('products.index', absolute: false));
+});
+
+test('admins are redirected to the dashboard after login', function () {
+    $user = User::factory()->admin()->create();
 
     $response = $this->post('/login', [
         'email' => $user->email,
